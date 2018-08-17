@@ -149,6 +149,15 @@ class LoginScreen extends React.Component {
                 >
                   Signup as Admin
                 </Button>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  className={classes.button}
+                  onClick={() => this.props.history.push('/signup/user/')}
+                  disabled={this.state.busy}
+                >
+                  Signup as User
+                </Button>
             </center>
           </CardContent>
         </Card>

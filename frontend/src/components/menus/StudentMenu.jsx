@@ -14,6 +14,7 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import StarBorder from '@material-ui/icons/StarBorder';
 import ExitToApp from '@material-ui/icons/ExitToApp';
+import RadioIcon from '@material-ui/icons/Radio';
 
 const styles = theme => ({
   root: {
@@ -40,37 +41,15 @@ class StudentMenu extends React.Component {
       <div className={classes.root}>
         <List
           component="nav"
-          subheader={<ListSubheader component="div">Student</ListSubheader>}
+          subheader={<ListSubheader component="div">User</ListSubheader>}
         >
           <ListItem button>
             <ListItemIcon>
-              <SendIcon />
+              <RadioIcon />
             </ListItemIcon>
-            <ListItemText inset primary="Sent mail" />
+            <ListItemText inset primary="Radio" />
           </ListItem>
-          <ListItem button>
-            <ListItemIcon>
-              <DraftsIcon />
-            </ListItemIcon>
-            <ListItemText inset primary="Drafts" />
-          </ListItem>
-          <ListItem button onClick={this.handleClick}>
-            <ListItemIcon>
-              <InboxIcon />
-            </ListItemIcon>
-            <ListItemText inset primary="Inbox" />
-            {this.state.open ? <ExpandLess /> : <ExpandMore />}
-          </ListItem>
-          <Collapse in={this.state.open} timeout="auto" unmountOnExit>
-            <List component="div" disablePadding>
-              <ListItem button className={classes.nested}>
-                <ListItemIcon>
-                  <StarBorder />
-                </ListItemIcon>
-                <ListItemText inset primary="Starred" />
-              </ListItem>
-            </List>
-          </Collapse>
+         
           <ListItem button onClick={this.props.logout}>
             <ListItemIcon>
               <ExitToApp />

@@ -11,6 +11,7 @@ import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import { Redirect } from 'react-router';
+import Sound from 'react-sound';
 
 import {
     ValidatorForm,
@@ -67,20 +68,40 @@ class Music extends Component {
     busy: false,
     music: null,
     imageError: false,
+    file: '/static/img/music.svg',
+    soundStatus: Sound.status.STOP,
+    musicURL: null
   }
  
   
 
   handleFileChange(event) {
     this.setState({
-      file: URL.createObjectURL(event.target.files[0]),
+      file: '/static/img/play.png',
       music: event.target.files[0],
       imageError: false,
     })
   }
 
-  openFileDialog(event) {
+  handleImageClick(event) {
+    if(!this.state.music)
+    {
     this.refs.profilepic.click()
+  }
+  else if(this.state.soundStatus == Sound.status.STOP){
+    this.setState({
+      musicURL: URL.createObjectURL(this.state.music),
+      soundStatus: Sound.status.PLAYING,
+      file: '/static/img/pause.jpeg'
+    });
+  }
+  else
+  {
+    this.setState({
+      soundStatus: Sound.status.PAUSE,
+      file: '/static/img/play.png'
+    })
+  }
   }
   
 
@@ -138,12 +159,37 @@ class Music extends Component {
         </Typography>
         <ValidatorForm onSubmit={this.handleSubmit.bind(this)} ref="form">
           <center>
+          <img
+              src={this.state.file}
+              className={classes.profilePic}
+              alt="error"
+              onClick={this.handleImageClick.bind(this)}
+            />
+            {
+              this.state.imageError
+              ? (
+                  <FormHelperText
+                    style={{ color: 'red', textAlign: 'center' }}
+                  >
+                    image is required
+                  </FormHelperText>
+                ) : ''
+            }
            <input
             type="file"
+            className = {classes.imageFile}
             onChange={this.handleFileChange.bind(this)}
             ref="profilepic"
             name="music"
           />
+          <Sound
+        url={this.state.musicURL}
+        playStatus={this.state.soundStatus}
+        playFromPosition={0 /* in milliseconds */}
+        onLoading={this.handleSongLoading}
+        onPlaying={this.handleSongPlaying}
+        onFinishedPlaying={this.handleSongFinishedPlaying}
+    />
           </center>
           
           <Button

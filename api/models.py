@@ -33,8 +33,7 @@ class CustomUserManager(UserManager):
 
 class User(AbstractUser):
     TYPE_CHOICES = (
-        ('staff', 'Staff'),
-        ('student', 'Student'),
+        ('user', 'User'),
         ('superadmin', 'Super Admin')
     )
 

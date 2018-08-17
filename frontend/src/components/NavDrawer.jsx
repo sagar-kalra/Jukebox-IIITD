@@ -52,8 +52,7 @@ class NavDrawer extends Component {
           this.props.user ? (
             {
               'superadmin': <SuperAdminMenu logout={this.logout.bind(this)} />,
-              'staff': <StaffMenu logout={this.logout.bind(this)} />,
-              'student': <StudentMenu logout={this.logout.bind(this)} />,
+              'user': <StudentMenu logout={this.logout.bind(this)} />,
             }[this.props.user.type]
           ) : ''
         }

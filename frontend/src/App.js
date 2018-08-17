@@ -10,21 +10,11 @@ import NavDrawer from './components/NavDrawer';
 import LoginScreen from "./pages/LoginScreen";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
-import CompleteProfile from "./pages/CompleteProfile";
 import PrivateRoute from './components/PrivateRoute';
-import UserTabs from "./components/AddUsers";
-import Centres from "./components/Centres";
-import Courses from "./components/Courses";
-import AddTest from "./pages/AddTest";
-import FromDoc from "./components/FromDoc";
-import AddTestManually from "./components/AddTestManually";
 import Error404 from './pages/Error404';
-import EditTest from './pages/EditTest';
-import StaffUsers from './pages/StaffUsers';
-import StudentUsers from './pages/StudentUsers';
-import TestList from './pages/TestList';
 import SignupAdmin from './pages/SignupAdmin';
 import Music from './pages/Music';
+import SignupUser from './pages/SignupUser';
 
 
 import './App.css';
@@ -154,87 +144,7 @@ class App extends React.Component {
                   Child={(props) => 
                     <Home {...props} user={this.state.user} />}
                 />
-                <PrivateRoute
-                  authed={isLoggedIn}
-                  path="/complete-profile/"
-                  Child = {(props) =>
-                    <CompleteProfile 
-                      {...props} 
-                      user={this.state.user}
-                      getUser={this.getUser}
-                    />
-                  }
-                />
-                <PrivateRoute
-                  authed={isLoggedIn}
-                  path="/tests/edit/:id/"
-                  Child = {(props) =>
-                    <EditTest
-                      {...props}
-                      user={this.state.user}
-                    />
-                  }
-                />
-                <PrivateRoute
-                  authed={isLoggedIn}
-                  path="/tests/add/from-doc/"
-                  Child = {(props) =>
-                    <FromDoc
-                      {...props} 
-                      user={this.state.user}
-                    />
-                  }
-                />
-                <PrivateRoute
-                  authed={isLoggedIn}
-                  path="/tests/add/manual/"
-                  Child = {(props) =>
-                    <AddTestManually
-                      {...props} 
-                      user={this.state.user}
-                    />
-                  }
-                />
-                <PrivateRoute
-                  authed={isLoggedIn}
-                  path="/tests/add/"
-                  Child = {(props) =>
-                    <AddTest
-                      {...props} 
-                      user={this.state.user}
-                    />
-                  }
-                />
-                <PrivateRoute
-                  authed={isLoggedIn}
-                  path="/users/staff/"
-                  Child = {(props) =>
-                    <StaffUsers
-                      {...props} 
-                      user={this.state.user}
-                    />
-                  }
-                />
-                <PrivateRoute
-                  authed={isLoggedIn}
-                  path="/users/students/"
-                  Child = {(props) =>
-                    <StudentUsers
-                      {...props} 
-                      user={this.state.user}
-                    />
-                  }
-                />
-                <PrivateRoute
-                  authed={isLoggedIn}
-                  path="/tests/list/"
-                  Child = {(props) =>
-                    <TestList
-                      {...props} 
-                      user={this.state.user}
-                    />
-                  }
-                />
+                
                 <Route path={'/login/'} exact strict render={(props) => {
                     return !isLoggedIn ?
                       <LoginScreen {...props} getUser={this.getUser} /> :
@@ -249,6 +159,11 @@ class App extends React.Component {
                 />
                 <Route path={'/signup/admin/'} exact strict render={(props) => (
                       <SignupAdmin {...props} />
+                    )
+                  }
+                />
+                <Route path={'/signup/user/'} exact strict render={(props) => (
+                      <SignupUser {...props} />
                     )
                   }
                 />

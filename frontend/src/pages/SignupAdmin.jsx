@@ -62,7 +62,7 @@ const styles = theme => ({
     },
 });
 
-class CompleteProfile extends Component {
+class SignupAdmin extends Component {
   state = {
     busy: false,
     file: '/static/img/profile.png',
@@ -107,6 +107,7 @@ class CompleteProfile extends Component {
       .then((res) => {
         this.setState({ busy: false });
         console.log("Successful")
+        this.props.history.push('/home/');
       })
       .catch((err) => {
         this.setState({ busy: false });
@@ -269,4 +270,4 @@ class CompleteProfile extends Component {
   }
 }
 
-export default withStyles(styles, { withTheme: true })(CompleteProfile);
+export default withStyles(styles, { withTheme: true })(SignupAdmin);

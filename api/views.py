@@ -243,3 +243,15 @@ class AddMusicView(APIView):
         return Response({
             'detail':'successfull'
             })
+
+class SignupUserView(APIView):
+    def post(self, request, *args, **kwargs):
+        print(request.data)
+        first_name, last_name, email, contact_number = request.data['first_name'], request.data['last_name'],  request.data['email'],request.data['contact_number']
+        user = User.objects.create(first_name = first_name, last_name = last_name, email = email, phone = contact_number, type_of_user = "user", username = request.data['username'], profile_photo = request.data['image'])
+        user.set_password(request.data['password'])
+        user.save()
+        student  = Student.objects.create(user = user)
+        return Response({
+            'detail' : 'successfull',
+            })

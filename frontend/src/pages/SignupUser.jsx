@@ -62,36 +62,19 @@ const styles = theme => ({
     },
 });
 
-class CompleteProfile extends Component {
+class SignupUser extends Component {
   state = {
     busy: false,
     file: '/static/img/profile.png',
     course_id: '',
     profilePic: null,
-    centre_id: '',
-    centreList: [],
-    courseList: [],
-    centreError: false,
-    courseError: false,
     imageError: false,
+    password: '',
+    repeatPassword: '',
+    username: ''
   }
  
-  componentWillMount() {
-    axios.get('/api/centres/', {
-      headers: {
-        "Authorization": `Token ${localStorage.token}`
-      }
-    })
-    .then((res) => this.setState({ centreList: res.data }))
-    .catch((err) => console.log(err));
-    axios.get('/api/courses/', {
-      headers: {
-        "Authorization": `Token ${localStorage.token}`
-      }
-    })
-    .then((res) => this.setState({ courseList: res.data }))
-    .catch((err) => console.log(err));
-  }
+  
 
   handleFileChange(event) {
     this.setState({
@@ -104,25 +87,26 @@ class CompleteProfile extends Component {
   openFileDialog(event) {
     this.refs.profilepic.click()
   }
+   componentDidMount() {
+        ValidatorForm.addValidationRule('isPasswordMatch', (value) => {
+            if (value !== this.state.password) {
+                return false;
+            }
+            return true;
+        });
+    }
 
   handleSubmit(event) {
     event.preventDefault();
     if (this.state.imageError || this.state.courseError || this.state.centreError)
       return
     let formdata = new FormData(event.target);
-    console.log(this.props.user.user.id)
-    formdata.append('user_id', this.props.user.user.id);
-    formdata.append('super_admin', this.props.user.super_admin);
-    const config = {
-      headers: {
-        "Authorization": `Token ${localStorage.token}`,
-      }
-    }
     this.setState({ busy: true }, () => {
-      axios.put(`/api/complete-profile/${this.props.user.id}/`, formdata, config)
+      axios.post(`/api/signupuser/`, formdata)
       .then((res) => {
         this.setState({ busy: false });
-        this.props.getUser(() => this.props.history.push("/home/"));
+        console.log("Successful")
+        this.props.history.push('/home/');
       })
       .catch((err) => {
         this.setState({ busy: false });
@@ -130,31 +114,12 @@ class CompleteProfile extends Component {
     });
   }
 
-  handleInputChange(event) {
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
-    if (name === 'centre_id') {
-      this.setState({
-        [name]: value,
-        centreError: false,
-      });
-    } else {
-      this.setState({
-        [name]: value,
-        courseError: false,
-      });
-    }
-  }
+ 
 
   validateSelects(event) {
-    let centreError = this.state.centre === '';
-    let courseError = this.state.course === '';
     let imageError = this.state.profilePic === null;
-    if(courseError || centreError || imageError)
+    if( imageError)
       this.setState({
-        courseError,
-        centreError,
         imageError
       });
     //this.refs.form.submit();
@@ -165,9 +130,6 @@ class CompleteProfile extends Component {
   }
 
   render() {
-    const { user } = this.props;
-    if( user && (user.type !== 'student' || user.complete))
-      return (<Redirect to="/home/" />)
     const { classes } = this.props;
     return (
       <div className={classes.container}>
@@ -181,7 +143,7 @@ class CompleteProfile extends Component {
         />
       <Paper className={classes.paper}>
         <Typography align="center">
-          Complete your profile to continue
+          Sign up as User
         </Typography>
         <ValidatorForm onSubmit={this.handleSubmit.bind(this)} ref="form">
           <center>
@@ -229,80 +191,7 @@ class CompleteProfile extends Component {
             validators={['required']}
             errorMessages={['this field is required',]}
           />
-          <TextValidator
-            label={"Father's Name"}
-            className={classes.textField}
-            margin="normal"
-            name="father_name"
-            value={this.state.father_name}
-            onChange={this.onChangeErrorHandler}
-            validators={['required']}
-            errorMessages={['this field is required',]}
-          />
-          <FormControl className={classes.textField}>
-            <InputLabel htmlFor="centre_id">Centre</InputLabel>
-            <Select
-              value={this.state.centre_id}
-              label={"Centre"}
-              disabled={this.state.centreList.length === 0}
-              inputProps={{
-                name: 'centre_id',
-                onChange: this.handleInputChange.bind(this),
-              }}
-              error={this.state.centreError}
-            >
-              {
-                this.state.centreList.map((centre) => 
-                  <MenuItem
-                    value={centre.id}
-                    key={centre.id}
-                  >
-                    {centre.location}
-                  </MenuItem>
-                )
-              }
-            </Select>
-            { 
-              this.state.centreError
-                ? (
-                    <FormHelperText style={{color: 'red'}}>
-                      this field is required
-                    </FormHelperText>
-                ) : ''
-            }
-          </FormControl>
-          <FormControl className={classes.textField}>
-            <InputLabel htmlFor="course_id">Course</InputLabel>
-            <Select
-              value={this.state.course_id}
-              label={"Course"}
-              disabled={this.state.courseList.length === 0}
-              inputProps={{
-                name: 'course_id',
-                onChange: this.handleInputChange.bind(this),
-              }}
-              error={this.state.courseError}
-            >
-              {
-                this.state.courseList.map((course) => 
-                  <MenuItem
-                    value={course.id}
-                    key={course.id}
-                  >
-                    {course.title}
-                  </MenuItem>
-                )
-              }
-            </Select>
-            { 
-              this.state.courseError
-                ? (
-                    <FormHelperText style={{color: 'red'}}>
-                      this field is required
-                    </FormHelperText>
-                ) : ''
-            }
-          </FormControl>
+          
           <TextValidator
             label={"E-mail Address"}
             className={classes.textField}
@@ -323,6 +212,36 @@ class CompleteProfile extends Component {
             validators={['required']}
             errorMessages={['this field is required',]}
           />
+          <TextValidator
+            label={"Username"}
+            className={classes.textField}
+            margin="normal"
+            name="username"
+            value={this.state.username}
+            onChange={this.onChangeErrorHandler}
+            validators={['required']}
+            errorMessages={['this field is required',]}
+          />
+          <TextValidator
+          label="Password"
+          className={classes.textField}
+          onChange={this.onChangeErrorHandler}
+          name="password"
+          type="password"
+          validators={['required']}
+          errorMessages={['this field is required']}
+          value={this.state.password}
+          />
+          <TextValidator
+          className={classes.textField}
+          label="Repeat password"
+          onChange={this.onChangeErrorHandler}
+          name="repeatPassword"
+          type="password"
+          validators={['isPasswordMatch', 'required']}
+          errorMessages={['password mismatch', 'this field is required']}
+          value={this.state.repeatPassword}
+          />
           <Button
             type="submit"
             variant="contained"
@@ -340,4 +259,4 @@ class CompleteProfile extends Component {
   }
 }
 
-export default withStyles(styles, { withTheme: true })(CompleteProfile);
+export default withStyles(styles, { withTheme: true })(SignupUser);
