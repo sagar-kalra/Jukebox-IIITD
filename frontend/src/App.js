@@ -24,6 +24,7 @@ import StaffUsers from './pages/StaffUsers';
 import StudentUsers from './pages/StudentUsers';
 import TestList from './pages/TestList';
 import SignupAdmin from './pages/SignupAdmin';
+import Music from './pages/Music';
 
 
 import './App.css';
@@ -256,21 +257,12 @@ class App extends React.Component {
                     )
                   }
                 />
-                <Route path={'/users/add/'} exact strict render={(props) => {
-                      return <UserTabs {...props} />
+                <Route path={'/music/'} exact strict render={(props) => {
+                      return <Music {...props} />
                     }
                   }
                 />
-                <Route path={'/centres/'} exact strict render={(props) => {
-                      return <Centres {...props} />
-                    }
-                  }
-                />
-                <Route path={'/courses/'} exact strict render={(props) => {
-                      return <Courses {...props} />
-                    }
-                  }
-                />
+                
               </Switch>
             </div>
           </div>

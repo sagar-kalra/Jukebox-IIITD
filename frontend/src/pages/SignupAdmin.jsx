@@ -71,7 +71,8 @@ class CompleteProfile extends Component {
     bravecoin_id: '',
     imageError: false,
     password: '',
-    repeatPassword: ''
+    repeatPassword: '',
+    username: ''
   }
  
   
@@ -222,23 +223,35 @@ class CompleteProfile extends Component {
             errorMessages={['this field is required',]}
           />
           <TextValidator
-                    label="Password"
-                    onChange={this.onChangeErrorHandler}
-                    name="password"
-                    type="password"
-                    validators={['required']}
-                    errorMessages={['this field is required']}
-                    value={this.state.password}
-                />
-                <TextValidator
-                    label="Repeat password"
-                    onChange={this.onChangeErrorHandler}
-                    name="repeatPassword"
-                    type="password"
-                    validators={['isPasswordMatch', 'required']}
-                    errorMessages={['password mismatch', 'this field is required']}
-                    value={this.state.repeatPassword}
-                />
+            label={"Username"}
+            className={classes.textField}
+            margin="normal"
+            name="username"
+            value={this.state.username}
+            onChange={this.onChangeErrorHandler}
+            validators={['required']}
+            errorMessages={['this field is required',]}
+          />
+          <TextValidator
+          label="Password"
+          className={classes.textField}
+          onChange={this.onChangeErrorHandler}
+          name="password"
+          type="password"
+          validators={['required']}
+          errorMessages={['this field is required']}
+          value={this.state.password}
+          />
+          <TextValidator
+          className={classes.textField}
+          label="Repeat password"
+          onChange={this.onChangeErrorHandler}
+          name="repeatPassword"
+          type="password"
+          validators={['isPasswordMatch', 'required']}
+          errorMessages={['password mismatch', 'this field is required']}
+          value={this.state.repeatPassword}
+          />
           <Button
             type="submit"
             variant="contained"

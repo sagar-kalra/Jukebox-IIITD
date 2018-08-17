@@ -229,8 +229,17 @@ class SignupAdminView(APIView):
     def post(self, request, *args, **kwargs):
         print(request.data)
         first_name, last_name, email, contact_number, bravecoin_id = request.data['first_name'], request.data['last_name'],  request.data['email'],request.data['contact_number'], request.data['bravecoin_id']
-        user = User.objects.create(first_name = first_name, last_name = last_name, email = email, phone = contact_number, type_of_user = "superadmin", username = "hello")
+        user = User.objects.create(first_name = first_name, last_name = last_name, email = email, phone = contact_number, password = request.data['password'],type_of_user = "superadmin", username = request.data['username'], profile_photo = request.data['image'])
+        user.set_password(request.data['password'])
+        user.save()
         return Response({
             'detail' : 'successfull',
             })
 
+class AddMusicView(APIView):
+    def post(self, request, *args, **kwargs):
+        print(request.data)
+        music = Music.objects.create(music = request.data['music'], user = request.user)
+        return Response({
+            'detail':'successfull'
+            })

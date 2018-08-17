@@ -42,6 +42,7 @@ class User(AbstractUser):
     last_name = models.CharField(max_length = 100)
     phone = models.CharField(max_length = 12, null = True)
     email = models.EmailField()
+    profile_photo = models.ImageField(upload_to = 'profile_photo', null = True)
     type_of_user = models.CharField(
         max_length=11,
         choices=TYPE_CHOICES,
@@ -49,7 +50,7 @@ class User(AbstractUser):
         null=False,
     )
 
-    
+
 
 # SuperAdmin - 1 for each institution
 class SuperAdmin(models.Model):
@@ -217,3 +218,10 @@ class Student(models.Model):
     )
     def __str__(self):
         return str(self.first_name)
+
+class Music(models.Model):
+    user = models.ForeignKey(User, on_delete = models.CASCADE)
+    music = models.FileField(upload_to = 'music/')
+
+    def __str__(self):
+        return self.user.first_name

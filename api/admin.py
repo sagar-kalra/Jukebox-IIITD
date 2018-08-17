@@ -79,12 +79,4 @@ class UserAdmin(BaseUserAdmin):
     filter_horizontal = ()
 
 admin.site.register(User, UserAdmin)
-admin.site.register(SuperAdmin)
-admin.site.register(Centre)
-admin.site.register(Course)
-admin.site.register(Test)
-admin.site.register(Section)
-admin.site.register(Question)
-admin.site.register(Option)
-admin.site.register(Staff)
-admin.site.register(Student)
+admin.site.register(Music)

@@ -21,6 +21,7 @@ import ExpandMore from '@material-ui/icons/ExpandMore';
 import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
 import ExitToApp from '@material-ui/icons/ExitToApp';
 import ListIcon from '@material-ui/icons/List';
+import MusicNoteIcon from '@material-ui/icons/MusicNote';
 
 const styles = theme => ({
   root: {
@@ -60,98 +61,14 @@ class SuperAdminMenu extends React.Component {
             <ListItemIcon>
               <HomeIcon />
             </ListItemIcon>
-            <ListItemText inset primary="Home" />
+            <ListItemText inset primary="Dashboard" />
           </ListItem>
-          <ListItem button onClick={() => this.handleClick('users')}>
+          <ListItem button onClick={() => this.goTo('/music/')}>
             <ListItemIcon>
-              <SupervisorAccountIcon />
+              <MusicNoteIcon />
             </ListItemIcon>
-            <ListItemText inset primary="Users" />
-            {this.state.users ? <ExpandLess /> : <ExpandMore />}
-          </ListItem>
-          <Collapse in={this.state.users} timeout="auto" unmountOnExit>
-            <List component="div" disablePadding>
-              <ListItem
-                button
-                className={classes.nested}
-                onClick={() => this.goTo('/users/staff/')}
-              >
-                <ListItemIcon>
-                  <VerifiedUserIcon />
-                </ListItemIcon>
-                <ListItemText inset primary="Staff" />
-              </ListItem>
-              <ListItem
-                button
-                className={classes.nested}
-                onClick={() => this.goTo('/users/students/')}
-              >
-                <ListItemIcon>
-                  <SchoolIcon />
-                </ListItemIcon>
-                <ListItemText inset primary="Students" />
-              </ListItem>
-              <ListItem
-                button
-                className={classes.nested}
-                onClick={() => this.goTo('/users/add/')}
-              >
-                <ListItemIcon>
-                  <AddIcon />
-                </ListItemIcon>
-                <ListItemText inset primary="Add Users" />
-              </ListItem>
-            </List>
-          </Collapse>
-          <ListItem button onClick={() => this.goTo('/centres/')}>
-            <ListItemIcon>
-              <StoreIcon />
-            </ListItemIcon>
-            <ListItemText inset primary="Centres" />
-          </ListItem>
-          <ListItem button onClick={() => this.goTo('/courses/')}>
-            <ListItemIcon>
-              <BookIcon />
-            </ListItemIcon>
-            <ListItemText inset primary="Courses" />
-          </ListItem>
-          <ListItem button onClick={() => this.handleClick('tests')}>
-            <ListItemIcon>
-              <AssignmentIcon />
-            </ListItemIcon>
-            <ListItemText inset primary="Tests" />
-            {this.state.tests ? <ExpandLess /> : <ExpandMore />}
-          </ListItem>
-          <Collapse in={this.state.tests} timeout="auto" unmountOnExit>
-            <List component="div" disablePadding>
-              <ListItem
-                button
-                className={classes.nested}
-                onClick={() => this.goTo('/tests/list/')}
-              >
-                <ListItemIcon>
-                  <ListIcon />
-                </ListItemIcon>
-                <ListItemText inset primary="All Tests" />
-              </ListItem>
-              <ListItem
-                button
-                className={classes.nested}
-                onClick={() => this.goTo('/tests/add/')}
-              >
-                <ListItemIcon>
-                  <AddIcon />
-                </ListItemIcon>
-                <ListItemText inset primary="Add Test" />
-              </ListItem>
-            </List>
-          </Collapse>
-          <ListItem button onClick={() => this.goTo('/results/')}>
-            <ListItemIcon>
-              <AssessmentIcon />
-            </ListItemIcon>
-            <ListItemText inset primary="Results" />
-          </ListItem>
+            <ListItemText inset primary="Music" />
+          </ListItem> 
           <ListItem button onClick={this.props.logout}>
             <ListItemIcon>
               <ExitToApp />

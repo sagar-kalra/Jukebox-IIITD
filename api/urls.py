@@ -6,6 +6,7 @@ urlpatterns = [
     path('students/add/', AddBulkStudentsView.as_view()),
     path('staff/add/', AddStaffView.as_view()),
     path('signupadmin/', SignupAdminView.as_view()),
+    path('music/add/', AddMusicView.as_view()),
     path('users/staff/', GetStaffUsersView.as_view()),
     path('users/students/', GetStudentUsersView.as_view()),
     path('tests/list/', TestListView.as_view()),
