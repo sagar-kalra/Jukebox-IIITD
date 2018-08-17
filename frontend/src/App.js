@@ -15,6 +15,8 @@ import Error404 from './pages/Error404';
 import SignupAdmin from './pages/SignupAdmin';
 import Music from './pages/Music';
 import SignupUser from './pages/SignupUser';
+import Radio from './pages/Radio';
+import Welcome from './pages/welcome';
 
 
 import './App.css';
@@ -174,6 +176,17 @@ class App extends React.Component {
                 />
                 <Route path={'/music/'} exact strict render={(props) => {
                       return <Music {...props} />
+                    }
+                  }
+                />
+                <Route path={'/radio/'} exact strict render={(props) => {
+                      return <Radio {...props} />
+                    }
+                  }
+                />
+
+                 <Route path={'/welcome/'} exact strict render={(props) => {
+                      return <Welcome {...props} />
                     }
                   }
                 />

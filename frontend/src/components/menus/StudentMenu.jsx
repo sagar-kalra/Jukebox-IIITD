@@ -15,6 +15,7 @@ import ExpandMore from '@material-ui/icons/ExpandMore';
 import StarBorder from '@material-ui/icons/StarBorder';
 import ExitToApp from '@material-ui/icons/ExitToApp';
 import RadioIcon from '@material-ui/icons/Radio';
+import { withRouter } from 'react-router-dom';
 
 const styles = theme => ({
   root: {
@@ -34,6 +35,9 @@ class StudentMenu extends React.Component {
     this.setState(state => ({ open: !state.open }));
   };
 
+goTo(path) {
+    this.props.history.push(path);
+  }
   render() {
     const { classes } = this.props;
 
@@ -43,7 +47,7 @@ class StudentMenu extends React.Component {
           component="nav"
           subheader={<ListSubheader component="div">User</ListSubheader>}
         >
-          <ListItem button>
+          <ListItem button onClick={() => this.goTo('/radio/')}>
             <ListItemIcon>
               <RadioIcon />
             </ListItemIcon>
@@ -66,4 +70,4 @@ StudentMenu.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(StudentMenu);
+export default withStyles(styles)(withRouter(StudentMenu))  ;
