@@ -224,3 +224,8 @@ class Music(models.Model):
 
     def __str__(self):
         return self.user.first_name
+
+class Vote(models.Model):
+    vote_up = models.PositiveIntegerField(default = 0)
+    music = models.ForeignKey(Music, on_delete = models.CASCADE)
+

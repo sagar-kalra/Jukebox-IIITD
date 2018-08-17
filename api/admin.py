@@ -80,3 +80,4 @@ class UserAdmin(BaseUserAdmin):
 
 admin.site.register(User, UserAdmin)
 admin.site.register(Music)
+admin.site.register(Vote)

@@ -86,7 +86,7 @@ class Music extends Component {
   handleImageClick(event) {
     if(!this.state.music)
     {
-    this.refs.profilepic.click()
+    this.refs.profilepic.click();
   }
   else if(this.state.soundStatus == Sound.status.STOP){
     this.setState({
