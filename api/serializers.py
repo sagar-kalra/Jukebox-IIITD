@@ -88,3 +88,14 @@ class TestSerializer(serializers.ModelSerializer):
     class Meta:
         model = Test
         fields = '__all__'
+
+class MusicSerializer(serializers.ModelSerializer):
+    url = serializers.SerializerMethodField()
+    id = serializers.ReadOnlyField()
+
+    class Meta:
+        model = Music
+        fields = ('url', 'artist', 'title', 'id')
+
+    def get_url(self, obj):
+        return obj.music.url

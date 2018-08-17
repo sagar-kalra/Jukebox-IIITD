@@ -221,6 +221,8 @@ class Student(models.Model):
 class Music(models.Model):
     user = models.ForeignKey(User, on_delete = models.CASCADE)
     music = models.FileField(upload_to = 'music/')
+    artist = models.CharField(max_length = 100, default = "Unknown")
+    title = models.CharField(max_length = 100, default = "Song Title")
 
     def __str__(self):
         return self.user.first_name

@@ -12,7 +12,8 @@ from django.core.mail import send_mail
 #from django.shortcuts import get_object_or_404
 import json
 import uuid
-from django.db.models import F
+#from django.db.models import F
+from rest_framework import viewsets
 
 def get_super_admin(user):
     type_of_user = user.type_of_user
@@ -25,6 +26,11 @@ def get_super_admin(user):
     return super_admin
 
 
+class MusicViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Music.objects.all()
+    serializer_class = MusicSerializer
+    class Meta:
+            ordering=['-id']
 
 class SignupAdminView(APIView):
     def post(self, request, *args, **kwargs):
