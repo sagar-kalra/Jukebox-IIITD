@@ -46,7 +46,7 @@ class SignupAdminView(APIView):
 class AddMusicView(APIView):
     def post(self, request, *args, **kwargs):
         print(request.data)
-        music = Music.objects.create(music = request.data['music'], user = request.user)
+        music = Music.objects.create(music = request.data['music'], user = request.user, title = request.data['title'], cover = request.data['cover'], artist = request.data['artist'])
         return Response({
             'detail':'successfull'
             })
@@ -55,7 +55,7 @@ class SignupUserView(APIView):
     def post(self, request, *args, **kwargs):
         print(request.data)
         first_name, last_name, email, contact_number = request.data['first_name'], request.data['last_name'],  request.data['email'],request.data['contact_number']
-        user = User.objects.create(first_name = first_name, last_name = last_name, email = email, phone = contact_number, type_of_user = "user", username = request.data['username'], profile_photo = request.data['image'])
+        user = User.objects.create(first_name = first_name, last_name = last_name, email = email, phone = contact_number, type_of_user = "user", username = request.data['username'], profile_photo = request.data['image'], steem_posting_key = request.data['steem_posting_key'])
         user.set_password(request.data['password'])
         user.save()
         student  = Student.objects.create(user = user)

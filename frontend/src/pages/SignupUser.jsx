@@ -71,7 +71,8 @@ class SignupUser extends Component {
     imageError: false,
     password: '',
     repeatPassword: '',
-    username: ''
+    username: '',
+    steem_posting_key: ''
   }
  
   
@@ -212,6 +213,17 @@ class SignupUser extends Component {
             validators={['required']}
             errorMessages={['this field is required',]}
           />
+          <TextValidator
+            label={"Steem Posting Key"}
+            className={classes.textField}
+            margin="normal"
+            name="steem_posting_key"
+            value={this.state.steem_posting_key}
+            onChange={this.onChangeErrorHandler}
+            validators={['required']}
+            errorMessages={['this field is required',]}
+          />
+          
           <TextValidator
             label={"Username"}
             className={classes.textField}

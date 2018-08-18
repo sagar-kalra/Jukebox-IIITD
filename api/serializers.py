@@ -95,7 +95,7 @@ class MusicSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Music
-        fields = ('url', 'artist', 'title', 'id')
+        fields = ('url', 'artist', 'title', 'id', 'cover')
 
     def get_url(self, obj):
         return obj.music.url

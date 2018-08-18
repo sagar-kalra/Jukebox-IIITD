@@ -166,7 +166,7 @@ componentDidMount(){
       <Grid container spacing={16}>
         <Grid item>
           <ButtonBase className={classes.image}>
-            <img className={classes.img} alt="complex" src="/static/images/grid/complex.jpg" />
+            <img className={classes.img} alt="complex" src={obj.cover} />
           </ButtonBase>
         </Grid>
         <Grid item xs={12} sm container>
@@ -174,6 +174,7 @@ componentDidMount(){
             <Grid item xs>
               <Typography gutterBottom variant="subheading">
                 {obj.title}
+                {obj.cover}
               </Typography>
               <Typography gutterBottom>{obj.artist}</Typography>
             </Grid>

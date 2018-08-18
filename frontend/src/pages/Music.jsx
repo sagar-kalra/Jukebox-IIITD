@@ -72,17 +72,26 @@ class Music extends Component {
     soundStatus: Sound.status.STOP,
     musicURL: null,
     title: '',
-    cover: ''
+    cover: '',
+    artist : ''
   }
  
   
 
   handleFileChange(event) {
+    console.log("Hola")
     this.setState({
       file: '/static/img/play.png',
-      music: event.target.files[0],
+      music : event.target.files[0],
       imageError: false,
-    })
+    });
+  }
+
+  handleCoverChange(event) {
+    console.log("Lola");
+    this.setState({
+      cover: event.target.files[0],
+    });
   }
 
   handleImageClick(event) {
@@ -192,7 +201,7 @@ class Music extends Component {
         onPlaying={this.handleSongPlaying}
         onFinishedPlaying={this.handleSongFinishedPlaying}
     />
-    <TextValidator
+          <TextValidator
             label={"Song Title"}
             className={classes.textField}
             margin="normal"
@@ -202,11 +211,21 @@ class Music extends Component {
             validators={['required']}
             errorMessages={['this field is required']}
           />
+          <TextValidator
+            label={"Artist"}
+            className={classes.textField}
+            margin="normal"
+            name="artist"
+            value={this.state.artist}
+            onChange={this.onChangeErrorHandler}
+            validators={['required']}
+            errorMessages={['this field is required']}
+          />
           <input
           label = {"Song Cover"}
             type="file"
-            onChange={this.handleFileChange.bind(this)}
-            ref="profilepic"
+            onChange={this.handleCoverChange.bind(this)}
+            ref="songcover"
             name="cover"
           />
           </center>
