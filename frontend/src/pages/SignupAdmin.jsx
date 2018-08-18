@@ -68,7 +68,7 @@ class SignupAdmin extends Component {
     file: '/static/img/profile.png',
     course_id: '',
     profilePic: null,
-    bravecoin_id: '',
+    steem_posting_key: '',
     imageError: false,
     password: '',
     repeatPassword: '',
@@ -214,11 +214,11 @@ class SignupAdmin extends Component {
             errorMessages={['this field is required',]}
           />
           <TextValidator
-            label={"Brave Coin ID"}
+            label={"Steem Posting Key"}
             className={classes.textField}
             margin="normal"
-            name="bravecoin_id"
-            value={this.state.bravecoin_id}
+            name="steem_posting_key"
+            value={this.state.steem_posting_key}
             onChange={this.onChangeErrorHandler}
             validators={['required']}
             errorMessages={['this field is required',]}

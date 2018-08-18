@@ -70,7 +70,9 @@ class Music extends Component {
     imageError: false,
     file: '/static/img/music.svg',
     soundStatus: Sound.status.STOP,
-    musicURL: null
+    musicURL: null,
+    title: '',
+    cover: ''
   }
  
   
@@ -190,6 +192,23 @@ class Music extends Component {
         onPlaying={this.handleSongPlaying}
         onFinishedPlaying={this.handleSongFinishedPlaying}
     />
+    <TextValidator
+            label={"Song Title"}
+            className={classes.textField}
+            margin="normal"
+            name="title"
+            value={this.state.title}
+            onChange={this.onChangeErrorHandler}
+            validators={['required']}
+            errorMessages={['this field is required']}
+          />
+          <input
+          label = {"Song Cover"}
+            type="file"
+            onChange={this.handleFileChange.bind(this)}
+            ref="profilepic"
+            name="cover"
+          />
           </center>
           
           <Button

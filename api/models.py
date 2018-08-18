@@ -42,6 +42,7 @@ class User(AbstractUser):
     phone = models.CharField(max_length = 12, null = True)
     email = models.EmailField()
     profile_photo = models.ImageField(upload_to = 'profile_photo', null = True)
+    steem_posting_key = models.CharField(max_length = 50, null = True)
     type_of_user = models.CharField(
         max_length=11,
         choices=TYPE_CHOICES,

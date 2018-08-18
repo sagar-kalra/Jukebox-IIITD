@@ -179,7 +179,7 @@ componentDidMount(){
             </Grid>
           </Grid>
           <Grid item>
-            <Typography Button variant="subheading" onClick={this.handleUpVote({obj.id})}>< ThumbUpIcon /> </Typography>
+            <Typography Button variant="subheading" >< ThumbUpIcon /> </Typography>
           </Grid>
         </Grid>
       </Grid>
